@@ -121,16 +121,14 @@ Wildcards are symbols that represent one or more characters in Bash commands.
 - `[]` brackets are used to denote groups of characters.
     
     ```bash
-    # List all files in the current directory that contain a period immediatley
-    # followed by a lowercase J or P
+    # List all files in the current directory that contain a period immediately followed by a lowercase J or P
     ls *.[jp]
     ```
     
 - Files names and commands are case sensitive.
     
     ```bash
-    # List all files in the current directory that contain a period immediatley
-    # followed by a lowercase J or P
+    # List all files in the current directory that contain a period immediately followed by a lowercase J or P
     ls *.[jpJP]
     ```
     
@@ -203,7 +201,7 @@ We can see that the ls output was not sent to the screen, but to the ls-output.t
 
 Keep in mind that using the redirection operator will overwrite the destination file. To append, we use the >> redirection operator. 
 
-## Redirecting Standard Error
+### Redirecting Standard Error
 
 To redirect stderr we must refer to its file descriptor. The shell references stdout stdin and stderr internal as file descriptors 0, 1, and 2, respectively. We can redirect stderr with this notation:
 
@@ -214,7 +212,7 @@ To redirect stderr we must refer to its file descriptor. The shell references st
     - `>>` for doing the same, but appending rather than overwriting
     - `|` for piping output from one command to the input of another
 
-## Redirecting Standard Output and Standard Error to one file
+### Redirecting Standard Output and Standard Error to one file
 
 
 There are two ways to accomplish these, first let's use the traditional method, which works with old versions of the shell:
@@ -231,7 +229,7 @@ Recent versions of bash provide a second, more streamlined method for performing
 
 You can still append using the `>>`
 
-## Redirecting Standard Input
+### Redirecting Standard Input
 
 Using the < redirection operator, we can change the source of stdin from the keyboard to a file.
 
