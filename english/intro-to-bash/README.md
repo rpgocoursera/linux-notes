@@ -188,10 +188,10 @@ Wildcards are symbols that represent one or more characters in Bash commands.
     
 I/O redirection allows us to redirect input and output of commands to and from files, as well as connect multiple commands together into pipelines.
 
-    - `<` for redirecting input to a source other than the keyboard
-    - `>` for redirecting output to destination other than the screen
-    - `>>` for doing the same, but appending rather than overwriting
-    - `|` for piping output from one command to the input of another
+- `<` for redirecting input to a source other than the keyboard
+- `>` for redirecting output to destination other than the screen
+- `>>` for doing the same, but appending rather than overwriting
+- `|` for piping output from one command to the input of another
 
 ### Redirecting Standard Output
 
