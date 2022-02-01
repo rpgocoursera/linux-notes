@@ -100,7 +100,7 @@ You are not expected to memorize commands, arguments, or flags. Bash has documen
 man mkdir
 ```
 
-We can also use the `---help` flag and it’ll provides us with a description of the command’s syntax and options more concisely than `man`.
+We can also use the `--help` flag and it’ll provides us with a description of the command’s syntax and options more concisely than `man`.
 
 ```bash
 mkdir --help
@@ -161,6 +161,7 @@ Wildcards are symbols that represent one or more characters in Bash commands.
     - Get documentation on a command.
 - `cd`
     - Stands for change directory.
+    - Get help with `man builtins`
     - Move up with `..`
     - Go home with `~`
 - `mkdir`
