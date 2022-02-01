@@ -353,8 +353,7 @@ grep -Eh '^bz|gz|zip' list*.txt
     # Say hello and create some files
 
     echo 'Creating files for you!'
-    for f in {a..z} {A..Z} {0..99}
-    do
+    for f in {a..z} {0..5}; do
         echo hello > "$f.txt"
     done
     ```
@@ -365,3 +364,8 @@ grep -Eh '^bz|gz|zip' list*.txt
     In our case: `chmod 755 create_files`
 
 3. Run the script `./create_files`
+4. If we wanted to run this command without the `./` we would need to add it to a directory in our `$PATH`
+5. `echo $PATH`
+6. An ideal location for personal scripts is `/usr/local/bin`
+7. Move file there `sudo cp create_files /usr/local/bin`
+8. Now you can run `create_files`
