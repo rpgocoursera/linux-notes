@@ -8,11 +8,11 @@ Embrace the power of the command line!
 
 # Ask me questions
 
-- [TWITTER](https://twitter.com/madebygps)
-- [LINKEDIN](https://linkedin.com/in/madebygps)
-- [TIKTOK](https://tiktok.com/@madebygps)
-- [GITHUB](https://github.com/madebygps)
-- [NOTES](https://madebygps.com)
+- [Tweet me](https://twitter.com/madebygps)
+- [Connect with me on LinkedIn](https://linkedin.com/in/madebygps)
+- [Follow the tok!](https://tiktok.com/@madebygps)
+- [My code and stuff on GitHub](https://github.com/madebygps)
+- [My notes on my blog](https://madebygps.com)
 
 # Agenda
 
@@ -24,12 +24,14 @@ Embrace the power of the command line!
     - What is Bash
 - Bash Fundamentals:
     - syntax
-    - ls
-    - man
+    - get help with commands
     - Wildcards
-    - Redirection
+    - Fundamental commands
+    - Redirection and Pipelines
+- Practice exercise
     - Terminate a process
     - Filter output with grep 
+    - A simple bash script
 
 # What is a Command Line Interface?
 
@@ -122,14 +124,14 @@ Wildcards are symbols that represent one or more characters in Bash commands.
     
     ```bash
     # List all files in the current directory that contain a period immediately followed by a lowercase J or P
-    ls *.[jp]
+    ls *.[jp]*
     ```
     
 - Files names and commands are case sensitive.
     
     ```bash
     # List all files in the current directory that contain a period immediately followed by a lowercase J or P
-    ls *.[jpJP]
+    ls *.[jpJP]*
     ```
     
 - Expressions in square brackets can represent a range of characters
@@ -163,6 +165,7 @@ Wildcards are symbols that represent one or more characters in Bash commands.
     - Go home with `~`
 - `mkdir`
     - Create a directory.
+    - `-p` to create a subdirectory 
 - `rmdir`
     - Delete an empty directory.
 - `rm`
@@ -185,35 +188,30 @@ Wildcards are symbols that represent one or more characters in Bash commands.
     
 I/O redirection allows us to redirect input and output of commands to and from files, as well as connect multiple commands together into pipelines.
 
-    - The program's results. Known as Standard Output or `stdout`
-    - Status and error messages. Known as Standard Error or `stderr`
-    - In addition, some programs take input from standard input `stdin` which by default is attached to the keyboard.
-
-### Redirecting Standard Output
-
-To redirect stdout to another file instead of the screen, we use the > redirection operator followed by the name of the file.
-
-For example, we could tell the shell to send the output of the ls command to the file `ls-output.txt` instead of the screen:   
-
-- `ls -l /usr/bin > ls-output.txt`
-
-We can see that the ls output was not sent to the screen, but to the ls-output.txt file.
-
-Keep in mind that using the redirection operator will overwrite the destination file. To append, we use the >> redirection operator. 
-
-### Redirecting Standard Error
-
-To redirect stderr we must refer to its file descriptor. The shell references stdout stdin and stderr internal as file descriptors 0, 1, and 2, respectively. We can redirect stderr with this notation:
-
-- `ls -l /bin/usr 2> ls-error.txt`
-    
     - `<` for redirecting input to a source other than the keyboard
     - `>` for redirecting output to destination other than the screen
     - `>>` for doing the same, but appending rather than overwriting
     - `|` for piping output from one command to the input of another
 
-### Redirecting Standard Output and Standard Error to one file
+### Redirecting Standard Output
 
+Also know as `stout` The program's results. Known as Standard Output or `stdout`. To redirect stdout to another file instead of the screen, we use the `>` redirection operator followed by the name of the file.
+
+For example, we could tell the shell to send the output of the ls command to the file `ls-output.txt` instead of the screen:   
+
+- `ls -l /usr/bin > ls-output.txt`
+
+We can see that the `ls` output was not sent to the screen, but to the `ls-output.txt` file.
+
+Keep in mind that using the redirection operator will overwrite the destination file. To append, we use the `>>` redirection operator. 
+
+### Redirecting Standard Error
+
+Status and error messages. Known as Standard Error or `stderr`. To redirect `stderr` we must refer to its file descriptor. The shell references `stdout` `stdin` and `stderr` internally as file descriptors 0, 1, and 2, respectively. We can redirect stderr with this notation:
+
+- `ls -l /bin/usr 2> ls-error.txt`
+    
+### Redirecting Standard Output and Standard Error to one file
 
 There are two ways to accomplish these, first let's use the traditional method, which works with old versions of the shell:
 
@@ -221,35 +219,32 @@ There are two ways to accomplish these, first let's use the traditional method, 
 
 First we are redirecting `stdout` to the file `ls-output.txt` and then we redirect file descriptor 2 `stderr` to file descriptor 1 stdout using the `2>&1` notation. 
 
-Keep in mind that the order of the redirections matter, the redirection of stderr must always occur after redirecting stdout.
+Keep in mind that the order of the redirections matter, the redirection of `stderr` must always occur after redirecting `stdout`.
+
+Recent versions of bash provide a second, more streamlined method for performing this combined redirection:
 
 - `ls -l /bin/usr &> ls-output.txt`
 
-Recent versions of bash provide a second, more streamlined method for performing this combined redirection
-
-You can still append using the `>>`
-
 ### Redirecting Standard Input
 
-Using the < redirection operator, we can change the source of stdin from the keyboard to a file.
+Using the `<` redirection operator, we can change the source of stdin from the keyboard to a file.
 
 - `cat < sample.txt`
 
 ## Pipelines
 
+It is possible to put several commands together into a pipeline. The commands used this way are referred to as filters. Filters take input, change it somehow and then output it.
 Using the pipe operator |, the `stout` of one command can be piped into the `stdin` of another. less is an example of this:
 
 - `ls -l /usr/bin | less`
 - `ps -ef | grep daemon`
 - `cat file.txt | fmt | pr | lpr`
 
-it is possible to put several commands together into a pipeline. The commands used this way are referred to as filters. Filters take input, change it somehow and then output it.
-
-- Use the `tee` command to read stdin and copies it to both stdout and to one or more files. `ls /usr/bin | tee ls.txt | grep zip`
+- Use the `tee` command to read `stdin` and copies it to both `stdout` and to one or more files. `ls /usr/bin | tee ls.txt | grep zip`
 
 # Terminate a misbehaving process
 
-1. Create a program named `[bad.py](http://bad.py)` that will misbehave.
+1. Create a program named `bad.py` that will misbehave.
     
     We’ll use `vi` to create a python program. It’s the universal text editor of Linux. Others include `vim` `nano` `emacs` 
     
@@ -263,13 +258,7 @@ it is possible to put several commands together into a pipeline. The commands us
        pass
     ```
     
-2. Start the program 
-    
-    ```bash
-    python3 bad.py &
-    ```
-    
-    - The `&` tells bash to run the command in the background and not wait for it to finish.
+2. Start the program `bash python3 bad.py &`. The `&` tells bash to run the command in the background and not wait for it to finish.
 
 3. Let’s list all the process that contain “python”
     
@@ -280,23 +269,22 @@ it is possible to put several commands together into a pipeline. The commands us
     - `ps` lists the running processes in the current shell
     - `-e` shows all processes
     - `-f` lists in full-format listing.
-    - We can see `[bad.py](http://bad.py)` is taking up a lot of CPU time.
-4. Let’s use the `kill` command to stop the running process. We have to decide which signal we are going to send to `kill` The default is `TERM`(allows the process to safely shut down)
+
+    We can see `bad.py` is taking up a lot of CPU time.
+
+4. Let’s use the `kill` command to stop the running process. Let's first list the signal types.
     
     ```bash
-    kill -l
-    
     # Display a list of signal types
+    kill -l    
     ```
-    
     - If we wanted a process to restart, we would use `SIGHUP`
     - In this case we want to stop the process without restarting, so we use `SIGKILL` `9`
     
+5. We have to decide which signal we are going to send to `kill` The default is `TERM`(allows the process to safely shut down)
     ```bash
     kill -9 PROCESS_ID
     ```
-    
-
 ## Use Bash and grep to filter CLI output
 
 Let’s use Linux’s universal pattern-matching program `grep` to filter Azure CLI output.
@@ -355,3 +343,25 @@ grep -h '^[A-Za-z0-9]' list*.txt
 grep -Eh '^(bz|gz|zip)' list*.txt
 grep -Eh '^bz|gz|zip' list*.txt
 ```
+
+## Simple bash script
+
+1. Write a script named `create_files.sh` with `vim create_files` with this contents:
+
+    ```sh
+    #!/bin/bash 
+    # Say hello and create some files
+
+    echo 'Creating files for you!'
+    for f in {a..z} {A..Z} {0..99}
+    do
+        echo hello > "$f.txt"
+    done
+    ```
+2. Make the script executable with `chmod`
+    - `chmod 755` for scripts that everyone can execute.
+    - `chmod 700` for scripts that only the owner can execute.
+
+    In our case: `chmod 755 create_files`
+
+3. Run the script `./create_files`
